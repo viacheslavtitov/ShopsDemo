@@ -12,7 +12,7 @@ public class ShopListProviderImpl implements ShopListProvider {
     @Override
     public Observable<List<ShopEntity>> getAllShops() {
         List<ShopEntity> shopList = new ArrayList<>();
-        for (int i = 1; i < 21; i++) {
+        for (int i = 0; i < 20; i++) {
             ShopEntity entity = new ShopEntity();
             entity.setId(i);
             entity.setTitle("Shop number " + i);

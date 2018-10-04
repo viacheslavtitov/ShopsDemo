@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import globus.shops.demo.app.R;
 import globus.shops.demo.app.domain.shop.ShopEntity;
 import globus.shops.demo.app.presentation.base.BaseActivity;
@@ -32,6 +35,8 @@ public class ShopListActivity extends BaseActivity implements ShopListRouter, Sh
     ProgressBar mProgressBar;
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
+    @BindView(R.id.container_filter)
+    ViewGroup mContainerFilter;
 
     private ShopListActivityComponent mComponent;
     private ShopListAdapter mAdapter;
@@ -51,6 +56,26 @@ public class ShopListActivity extends BaseActivity implements ShopListRouter, Sh
         mPresenter.loadShops();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @OnClick(R.id.btn_filter)
+    public void onFilterClick(View view) {
+        mContainerFilter.setVisibility(mContainerFilter.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+    }
+
+    @OnClick({R.id.radio_btn_address, R.id.radio_btn_number})
+    public void onSortChooseClick(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+        switch (view.getId()) {
+            case R.id.radio_btn_address:
+                if (checked)
+                    mPresenter.sortByAddress(mAdapter.getData());
+                    break;
+            case R.id.radio_btn_number:
+                if (checked)
+                    mPresenter.sortByNumber(mAdapter.getData());
+                    break;
+        }
     }
 
     @Override

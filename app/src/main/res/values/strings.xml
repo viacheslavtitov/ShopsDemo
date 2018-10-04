@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ShopsDemo</string>
+
+    <string name="sort">Sort</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="address">Address</string>
+    <string name="number">Number</string>
 </resources>

@@ -50,6 +50,10 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ShopIt
         return mData != null && mData.size() > position ? mData.get(position) : null;
     }
 
+    public List<ShopEntity> getData() {
+        return mData;
+    }
+
     static class ShopItemHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.text_view_title)

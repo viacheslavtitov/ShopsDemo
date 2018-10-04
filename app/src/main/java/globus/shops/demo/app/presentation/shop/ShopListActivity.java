@@ -1,6 +1,7 @@
 package globus.shops.demo.app.presentation.shop;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -33,6 +34,7 @@ public class ShopListActivity extends BaseActivity implements ShopListRouter, Sh
     RecyclerView mRecyclerView;
 
     private ShopListActivityComponent mComponent;
+    private ShopListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class ShopListActivity extends BaseActivity implements ShopListRouter, Sh
         mPresenter.setRouter(this);
         mPresenter.setView(this);
         mPresenter.loadShops();
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -56,7 +60,8 @@ public class ShopListActivity extends BaseActivity implements ShopListRouter, Sh
 
     @Override
     public void displayShops(List<ShopEntity> shopList) {
-
+        mAdapter = new ShopListAdapter(shopList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override

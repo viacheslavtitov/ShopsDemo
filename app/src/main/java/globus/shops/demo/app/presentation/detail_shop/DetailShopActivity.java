@@ -1,5 +1,7 @@
 package globus.shops.demo.app.presentation.detail_shop;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -13,6 +15,7 @@ import java.util.Date;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import globus.shops.demo.app.R;
 import globus.shops.demo.app.domain.shop.detail.ShopDetailEntity;
 import globus.shops.demo.app.presentation.base.BaseActivity;
@@ -47,6 +50,7 @@ public class DetailShopActivity extends BaseActivity implements DetailShopView, 
     TextView mTextViewStatus;
 
     private DetailShopActivityComponent mComponent;
+    private ShopDetailEntity mShopDetailEntity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,11 +88,24 @@ public class DetailShopActivity extends BaseActivity implements DetailShopView, 
 
     @Override
     public void openMap(double latitude, double longitude) {
+        Uri gmmIntentUri = Uri.parse("geo:" + latitude + "," + longitude);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
+    }
 
+    @OnClick(R.id.text_view_address)
+    public void onAddressClick(View view) {
+        if (mShopDetailEntity != null) {
+            openMap(mShopDetailEntity.getLatitude(), mShopDetailEntity.getLongitude());
+        }
     }
 
     @Override
     public void displayDetailShop(ShopDetailEntity entity) {
+        mShopDetailEntity = entity;
         if (entity == null) return;
         mTextViewTitle.setText(entity.getTitle());
         mTextViewAddress.setText(entity.getAddress());

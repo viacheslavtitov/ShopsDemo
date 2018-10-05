@@ -17,9 +17,11 @@ import globus.shops.demo.app.domain.shop.ShopEntity;
 public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ShopItemHolder> {
 
     private List<ShopEntity> mData;
+    private ShopListRouter mRouter;
 
-    public ShopListAdapter(List<ShopEntity> data) {
+    public ShopListAdapter(List<ShopEntity> data, ShopListRouter router) {
         mData = data;
+        mRouter = router;
     }
 
     @NonNull
@@ -39,6 +41,11 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ShopIt
             holder.textViewAddress.setText(entity.getAddress());
             holder.textViewNumber.setText(String.valueOf(entity.getId()));
         }
+        holder.itemView.setOnClickListener(click -> {
+            if (mRouter != null) {
+                mRouter.openDetailShop(entity);
+            }
+        });
     }
 
     @Override

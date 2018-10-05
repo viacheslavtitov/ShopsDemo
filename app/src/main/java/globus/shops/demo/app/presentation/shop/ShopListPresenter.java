@@ -17,6 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class ShopListPresenter extends BasePresenter<ShopListView, ShopListRouter> {
+
     private final GetShopListInteractor mGetShopListInteractor;
 
     @Inject

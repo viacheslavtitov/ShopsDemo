@@ -10,5 +10,5 @@ import globus.shops.demo.app.presentation.injection.DomainModule;
 @Singleton
 @Component(modules = {DomainModule.class, DataModule.class, ShopListModule.class})
 public interface ShopListActivityComponent {
-    void inject(ShopListActivity chatsFragment);
+    void inject(ShopListActivity activity);
 }

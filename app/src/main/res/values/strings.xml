@@ -5,4 +5,12 @@
     <string name="sort_by">Sort by:</string>
     <string name="address">Address</string>
     <string name="number">Number</string>
+    <string name="profit">Profit</string>
+    <string name="open_date">Date of opened</string>
+    <string name="status">Status</string>
+    <string name="currency_symbol">RUB</string>
+    <string name="open">Open</string>
+    <string name="closed">Closed</string>
+    <string name="repair">Repair</string>
+    <string name="detail_information">Detail information</string>
 </resources>

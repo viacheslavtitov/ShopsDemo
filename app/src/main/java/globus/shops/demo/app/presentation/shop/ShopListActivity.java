@@ -1,5 +1,6 @@
 package globus.shops.demo.app.presentation.shop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import globus.shops.demo.app.R;
 import globus.shops.demo.app.domain.shop.ShopEntity;
 import globus.shops.demo.app.presentation.base.BaseActivity;
 import globus.shops.demo.app.presentation.base.Layout;
+import globus.shops.demo.app.presentation.detail_shop.DetailShopActivity;
 import globus.shops.demo.app.presentation.injection.DataModule;
 import globus.shops.demo.app.presentation.injection.DomainModule;
 import globus.shops.demo.app.presentation.injection.shop.DaggerShopListActivityComponent;
@@ -70,22 +72,25 @@ public class ShopListActivity extends BaseActivity implements ShopListRouter, Sh
             case R.id.radio_btn_address:
                 if (checked)
                     mPresenter.sortByAddress(mAdapter.getData());
-                    break;
+                break;
             case R.id.radio_btn_number:
                 if (checked)
                     mPresenter.sortByNumber(mAdapter.getData());
-                    break;
+                break;
         }
     }
 
     @Override
     public void openDetailShop(ShopEntity entity) {
-
+        if (entity == null) return;
+        Intent intent = new Intent(this, DetailShopActivity.class);
+        intent.putExtra(DetailShopActivity.BUNDLE_SHOP_ID, entity.getId());
+        startActivity(intent);
     }
 
     @Override
     public void displayShops(List<ShopEntity> shopList) {
-        mAdapter = new ShopListAdapter(shopList);
+        mAdapter = new ShopListAdapter(shopList, this);
         mRecyclerView.setAdapter(mAdapter);
     }
 

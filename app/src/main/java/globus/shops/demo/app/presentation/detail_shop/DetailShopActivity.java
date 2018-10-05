@@ -61,7 +61,7 @@ public class DetailShopActivity extends BaseActivity implements DetailShopView, 
         mPresenter.setRouter(this);
         mPresenter.setView(this);
         if (getIntent() != null && getIntent().hasExtra(BUNDLE_SHOP_ID)) {
-            mPresenter.loadDetailShop(getIntent().getIntExtra(BUNDLE_SHOP_ID, -1));
+            mPresenter.loadDetailShop(this, getIntent().getIntExtra(BUNDLE_SHOP_ID, -1));
         } else {
             throw new RuntimeException("Shop ID can't be empty");
         }

@@ -55,7 +55,7 @@ public class ShopListActivity extends BaseActivity implements ShopListRouter, Sh
 
         mPresenter.setRouter(this);
         mPresenter.setView(this);
-        mPresenter.loadShops();
+        mPresenter.loadShops(this);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
